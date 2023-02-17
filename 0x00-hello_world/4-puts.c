@@ -2,7 +2,7 @@
 /**
 * main - Entry point
 *
-* Description: ' C program that prints exactly Programming is like building a multilingual puzzle, followed by a new line.'
+* Description: ' C program that prints using puts'
 *
 * Return: Always 0 (Success)
 */
