@@ -1,84 +1,91 @@
-
+#include <stdlib.h>
 #include "dog.h"
 
-/**
- * new_dog - creates a new dog
- * @name: name of dog
- * @age: age of dog
- * @owner: owner of dog
- * Return: malloced dog_t
- **/
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 
+/**
+  * new_dog - ...
+  * @name: ...
+  * @age: ...
+  * @owner: ...
+  *
+  * Return: ...
+  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	char *n, *o;
-	dog_t *new_dog = malloc(sizeof(dog_t));
+	dog_t *max_dog;
+	int name_l = 0, own_l = 0;
 
-	if (!new_dog || !name || !owner)
+	if (name != NULL && owner != NULL)
 	{
-		return (NULL);
+		name_l = _strlen(name) + 1;
+		own_l = _strlen(owner) + 1;
+		max_dog = malloc(sizeof(dog_t));
+
+		if (max_dog == NULL)
+			return (NULL);
+
+		max_dog->name = malloc(sizeof(char) * name_l);
+
+		if (max_dog->name == NULL)
+		{
+			free(max_dog);
+			return (NULL);
+		}
+
+		max_dog->owner = malloc(sizeof(char) * own_l);
+
+		if (max_dog->owner == NULL)
+		{
+			free(max_dog->name);
+			free(max_dog);
+			return (NULL);
+		}
+
+		max_dog->name = _strcpy(max_dog->name, name);
+		max_dog->owner = _strcpy(max_dog->owner, owner);
+		max_dog->age = age;
 	}
-	n = malloc(_strlen(name) + 1);
-	if (!n)
-	{
-		return (free(new_dog), NULL);
-	}
-	n = _strdup(name);
-	new_dog->name = n;
-	o = malloc(_strlen(owner) + 1);
-	if (!o)
-	{
-		return (free(new_dog->name), free(new_dog), NULL);
-	}
-	o = _strdup(owner);
-	new_dog->owner = o;
-	new_dog->age = age;
-	return (new_dog);
+
+	return (max_dog);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: string s
- * Return: length of string
- **/
-
+  * _strlen - Returns the length of a string
+  * @s: String to count
+  *
+  * Return: String length
+  */
 int _strlen(char *s)
 {
-	char *p = s;
+	int c = 0;
 
-	while (*s)
+	for (; *s != '\0'; s++)
 	{
-		s++;
+		c++;
 	}
-	return (s - p);
+
+	return (c);
 }
 
 /**
- * _strdup - returns a pointer to a newly allocated space in memory,
- * which contains a copy of the string given as a parameter.
- * @str: string to be copied
- * Return: copied string
- */
-
-char *_strdup(char *str)
+  * _strcpy - Copy a string
+  * @dest: Destination value
+  * @src: Source value
+  *
+  * Return: the pointer to dest
+  */
+char *_strcpy(char *dest, char *src)
 {
-	int i, len;
-	char *copy;
+	int i;
 
-	if (!str)
+	for (i = 0; src[i] != '\0'; i++)
 	{
-		return (NULL);
+		dest[i] = src[i];
 	}
-	len = _strlen(str);
-	copy = malloc(sizeof(char) * len + 1);
-	if (!copy)
-	{
-		return (NULL);
-	}
-	for (i = 0; i < len; i++)
-	{
-		copy[i] = str[i];
-	}
-	copy[i] = 0;
-	return (copy);
+
+	dest[i++] = '\0';
+
+	return (dest);
 }
