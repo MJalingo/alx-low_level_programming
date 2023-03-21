@@ -7,7 +7,7 @@
  * @age: age of dog
  * @owner: owner of dog
  * Return: malloced dog_t
- */
+ **/
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
@@ -40,7 +40,7 @@ dog_t *new_dog(char *name, float age, char *owner)
  * _strlen - returns the length of a string
  * @s: string s
  * Return: length of string
- */
+ **/
 
 int _strlen(char *s)
 {
